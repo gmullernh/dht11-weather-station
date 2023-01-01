@@ -1,0 +1,6 @@
+adafruit-circuitpython-dht==3.7.8
+RPi.GPIO==0.7.1
+Flask==2.1.2
+Flask-Cors==3.0.10
+psycopg2-binary==2.9.5
+apscheduler==3.9.1

@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  # Database
+  questdb:
+    container_name: questdb
+    image: questdb/questdb
+    ports:
+      - "8812:8812"
+    restart: unless-stopped
+    volumes:
+      - ./questdb:/var/lib/questdb # Saves the database data inside the current folder
+
+  # API Service
+  api:
+    build: api
+    ports:
+      - "81:8080"
+    privileged: true
+    depends_on:
+      - questdb
+    links:
+      - 'questdb:db'
+
+  # Frontend application
+  frontend:
+    build: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
